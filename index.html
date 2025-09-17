@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HippoType - Professional Speed Typing Test Game">
+    <meta name="keywords" content="typing test, speed typing, WPM test, typing game">
+    <meta name="author" content="HippoType Team">
+    
+    <title>HippoType - Professional Speed Typing Game</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loader">
+            <svg class="loader-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path d="M584.2 96.36c-28.88-1.701-54.71 17.02-79.74 26.49C490 88.22 455.9 64 416 64c-11.25 0-22 2.252-32 5.877V56C384 42.75 373.2 32 360 32h-16C330.8 32 320 42.75 320 56v49C285.1 79.62 241.2 64 192 64C85.1 64 0 135.6 0 224v232C0 469.3 10.75 480 24 480h48C85.25 480 96 469.3 96 456v-62.87C128.4 407.5 166.8 416 208 416s79.63-8.492 112-22.87V456c0 13.25 10.75 24 24 24h48c13.25 0 24-10.75 24-24V288h128v32c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V288c17.62 0 32-14.38 32-32l-.0001-96.07C639.1 127.8 616.4 98.25 584.2 96.36zM447.1 176c-8.875 0-16-7.125-16-16S439.1 144 448 144s16 7.125 16 16S456.9 176 447.1 176z"/>
+            </svg>
+            <div class="loader-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <p class="loader-text">Loading HippoType...</p>
+        </div>
+    </div>
+
+    <!-- Skip Link -->
+    <a href="#game-area" class="skip-link">Skip to game</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                    <path d="M584.2 96.36c-28.88-1.701-54.71 17.02-79.74 26.49C490 88.22 455.9 64 416 64c-11.25 0-22 2.252-32 5.877V56C384 42.75 373.2 32 360 32h-16C330.8 32 320 42.75 320 56v49C285.1 79.62 241.2 64 192 64C85.1 64 0 135.6 0 224v232C0 469.3 10.75 480 24 480h48C85.25 480 96 469.3 96 456v-62.87C128.4 407.5 166.8 416 208 416s79.63-8.492 112-22.87V456c0 13.25 10.75 24 24 24h48c13.25 0 24-10.75 24-24V288h128v32c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V288c17.62 0 32-14.38 32-32l-.0001-96.07C639.1 127.8 616.4 98.25 584.2 96.36zM447.1 176c-8.875 0-16-7.125-16-16S439.1 144 448 144s16 7.125 16 16S456.9 176 447.1 176z"/>
+                </svg>
+                <h1 class="site-title">HippoType</h1>
+            </div>
+
+            <nav class="game-controls">
+                <div class="control-group">
+                    <label for="testMode">Mode:</label>
+                    <select id="testMode">
+                        <option value="15s">15 seconds</option>
+                        <option value="30s">30 seconds</option>
+                        <option value="60s" selected>1 minute</option>
+                        <option value="120s">2 minutes</option>
+                        <option value="300s">5 minutes</option>
+                        <option value="25w">25 words</option>
+                        <option value="50w">50 words</option>
+                        <option value="100w">100 words</option>
+                        <option value="zen">Zen mode</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="language">Language:</label>
+                    <select id="language">
+                        <option value="en" selected>English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="code">Code</option>
+                    </select>
+                </div>
+
+                <button id="newGameBtn" class="btn primary-btn">
+                    <span class="btn-text">New Game</span>
+                    <span class="btn-icon">⌨️</span>
+                </button>
+                
+                <button id="settingsBtn" class="btn secondary-btn" aria-label="Settings">
+                    ⚙️
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- User Stats Bar -->
+        <div class="user-stats-bar">
+            <div class="user-stat">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-label">Best:</span>
+                <span class="stat-value" id="bestWPM">0</span> WPM
+            </div>
+            <div class="user-stat">
+                <span class="stat-icon">📊</span>
+                <span class="stat-label">Avg:</span>
+                <span class="stat-value" id="avgWPM">0</span> WPM
+            </div>
+            <div class="user-stat">
+                <span class="stat-icon">🎯</span>
+                <span class="stat-label">Tests:</span>
+                <span class="stat-value" id="totalTests">0</span>
+            </div>
+            <div class="user-stat">
+                <span class="stat-icon">🔥</span>
+                <span class="stat-label">Streak:</span>
+                <span class="stat-value" id="streak">0</span>
+            </div>
+        </div>
+
+        <!-- Live Stats Panel -->
+        <section class="stats-panel" id="statsPanel">
+            <div class="stat-item">
+                <span class="stat-label">WPM</span>
+                <span class="stat-value" id="wpm">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value" id="accuracy">100%</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Time</span>
+                <span class="stat-value" id="timer">0:00</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Combo</span>
+                <span class="stat-value combo-value" id="combo">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Errors</span>
+                <span class="stat-value" id="errors">0</span>
+            </div>
+        </section>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Game Area -->
+        <section id="game-area" class="game-area" tabindex="0">
+            <div id="target-words" class="target-words">
+                <p class="placeholder-text">Press "New Game" to start typing</p>
+            </div>
+            <div id="cursor" class="cursor"></div>
+            <div id="focus-prompt" class="focus-prompt">
+                Click here or press TAB to focus
+            </div>
+        </section>
+
+        <!-- WPM Chart -->
+        <div class="chart-container">
+            <canvas id="wpmChart" width="600" height="150"></canvas>
+        </div>
+
+        <!-- Results Panel -->
+        <section id="results-panel" class="results-panel hidden">
+            <h2 class="results-title">Test Complete! 🎉</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-icon">⚡</div>
+                    <div class="result-label">Speed</div>
+                    <div class="result-value" id="finalWPM">0</div>
+                    <div class="result-unit">WPM</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-icon">🎯</div>
+                    <div class="result-label">Accuracy</div>
+                    <div class="result-value" id="finalAccuracy">0</div>
+                    <div class="result-unit">%</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-icon">⏱️</div>
+                    <div class="result-label">Time</div>
+                    <div class="result-value" id="finalTime">0:00</div>
+                    <div class="result-unit"></div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-icon">🔥</div>
+                    <div class="result-label">Max Combo</div>
+                    <div class="result-value" id="finalCombo">0</div>
+                    <div class="result-unit">keys</div>
+                </div>
+            </div>
+
+            <div class="detailed-stats">
+                <h3>Detailed Statistics</h3>
+                <div class="stats-row">
+                    <div class="stat-detail">
+                        <span>Total Characters:</span>
+                        <strong id="totalChars">0</strong>
+                    </div>
+                    <div class="stat-detail">
+                        <span>Correct Characters:</span>
+                        <strong id="correctCharsCount">0</strong>
+                    </div>
+                    <div class="stat-detail">
+                        <span>Total Errors:</span>
+                        <strong id="totalErrorsCount">0</strong>
+                    </div>
+                    <div class="stat-detail">
+                        <span>Raw WPM:</span>
+                        <strong id="rawWPM">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="retryBtn" class="btn primary-btn">Try Again</button>
+                <button id="nextBtn" class="btn secondary-btn">Next Test</button>
+                <button id="shareBtn" class="btn tertiary-btn">Share Results</button>
+            </div>
+        </section>
+
+        <!-- Achievements Panel -->
+        <div id="achievements-panel" class="achievements-panel hidden">
+            <h3>Achievements</h3>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-modal" id="closeSettings">×</button>
+            </div>
+            
+            <div class="settings-body">
+                <div class="settings-group">
+                    <h3>🎨 Appearance</h3>
+                    <label class="setting-item">
+                        <span>Theme:</span>
+                        <select id="themeSelect">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="ocean">Ocean</option>
+                            <option value="forest">Forest</option>
+                            <option value="sunset">Sunset</option>
+                            <option value="matrix">Matrix</option>
+                        </select>
+                    </label>
+                    <label class="setting-item">
+                        <span>Font Size:</span>
+                        <input type="range" id="fontSize" min="16" max="32" value="24">
+                        <span id="fontSizeValue">24px</span>
+                    </label>
+                    <label class="setting-item checkbox">
+                        <input type="checkbox" id="smoothCaret" checked>
+                        <span>Smooth caret animation</span>
+                    </label>
+                </div>
+
+                <div class="settings-group">
+                    <h3>🔊 Sound</h3>
+                    <label class="setting-item checkbox">
+                        <input type="checkbox" id="soundEnabled" checked>
+                        <span>Enable sound effects</span>
+                    </label>
+                    <label class="setting-item">
+                        <span>Volume:</span>
+                        <input type="range" id="volume" min="0" max="100" value="30">
+                        <span id="volumeValue">30%</span>
+                    </label>
+                </div>
+
+                <div class="settings-group">
+                    <h3>⌨️ Typing</h3>
+                    <label class="setting-item checkbox">
+                        <input type="checkbox" id="showKeyboard">
+                        <span>Show virtual keyboard</span>
+                    </label>
+                    <label class="setting-item checkbox">
+                        <input type="checkbox" id="stopOnError">
+                        <span>Stop cursor on error</span>
+                    </label>
+                    <label class="setting-item checkbox">
+                        <input type="checkbox" id="blindMode">
+                        <span>Blind mode (hide typed text)</span>
+                    </label>
+                </div>
+
+                <div class="settings-group">
+                    <h3>📊 Data</h3>
+                    <button class="btn secondary-btn" id="exportStats">Export Statistics</button>
+                    <button class="btn danger-btn" id="resetStats">Reset All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Virtual Keyboard -->
+    <div id="keyboard" class="keyboard hidden">
+        <div class="keyboard-row">
+            <div class="key" data-key="`">`</div>
+            <div class="key" data-key="1">1</div>
+            <div class="key" data-key="2">2</div>
+            <div class="key" data-key="3">3</div>
+            <div class="key" data-key="4">4</div>
+            <div class="key" data-key="5">5</div>
+            <div class="key" data-key="6">6</div>
+            <div class="key" data-key="7">7</div>
+            <div class="key" data-key="8">8</div>
+            <div class="key" data-key="9">9</div>
+            <div class="key" data-key="0">0</div>
+            <div class="key" data-key="-">-</div>
+            <div class="key" data-key="=">=</div>
+            <div class="key wide" data-key="Backspace">←</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key wide" data-key="Tab">Tab</div>
+            <div class="key" data-key="q">Q</div>
+            <div class="key" data-key="w">W</div>
+            <div class="key" data-key="e">E</div>
+            <div class="key" data-key="r">R</div>
+            <div class="key" data-key="t">T</div>
+            <div class="key" data-key="y">Y</div>
+            <div class="key" data-key="u">U</div>
+            <div class="key" data-key="i">I</div>
+            <div class="key" data-key="o">O</div>
+            <div class="key" data-key="p">P</div>
+            <div class="key" data-key="[">[</div>
+            <div class="key" data-key="]">]</div>
+            <div class="key" data-key="\">\</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key wide" data-key="CapsLock">Caps</div>
+            <div class="key" data-key="a">A</div>
+            <div class="key" data-key="s">S</div>
+            <div class="key" data-key="d">D</div>
+            <div class="key" data-key="f">F</div>
+            <div class="key" data-key="g">G</div>
+            <div class="key" data-key="h">H</div>
+            <div class="key" data-key="j">J</div>
+            <div class="key" data-key="k">K</div>
+            <div class="key" data-key="l">L</div>
+            <div class="key" data-key=";">;</div>
+            <div class="key" data-key="'">'</div>
+            <div class="key wide" data-key="Enter">Enter</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key wide" data-key="Shift">Shift</div>
+            <div class="key" data-key="z">Z</div>
+            <div class="key" data-key="x">X</div>
+            <div class="key" data-key="c">C</div>
+            <div class="key" data-key="v">V</div>
+            <div class="key" data-key="b">B</div>
+            <div class="key" data-key="n">N</div>
+            <div class="key" data-key="m">M</div>
+            <div class="key" data-key=",">,</div>
+            <div class="key" data-key=".">.</div>
+            <div class="key" data-key="/">/</div>
+            <div class="key wide" data-key="Shift">Shift</div>
+        </div>
+        <div class="keyboard-row">
+            <div class="key wide" data-key="Control">Ctrl</div>
+            <div class="key" data-key="Alt">Alt</div>
+            <div class="key spacebar" data-key=" ">Space</div>
+            <div class="key" data-key="Alt">Alt</div>
+            <div class="key wide" data-key="Control">Ctrl</div>
+        </div>
+    </div>
+
+    <script src="typing.js"></script>
+</body>
+</html>
